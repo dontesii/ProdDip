@@ -31,11 +31,17 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
-
+    - debug: msg="{{ lookup('env','BUILD_NUMBER') }}"
+    - name: stop nginx
+      service:
+          name: nginx
+          state: stopped
+    - name: ensure nginx is not installed
+      apt: name=nginx state=absent   
     - name:  Start container
       docker_container:
         name: myapp
-        image: dontesi/projectdiplom:{{ lookup('env','BUILD_NUMBER') }}
+        image: jekanik/projectfordiplom:{{ lookup('env','BUILD_NUMBER') }}
         state: started
         pull: true
         recreate: yes
