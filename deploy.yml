@@ -41,7 +41,7 @@
     - name:  Start container
       docker_container:
         name: myapp
-        image: jekanik/projectfordiplom:{{ lookup('env','BUILD_NUMBER') }}
+        image: dontesi/projectdiplom:{{ lookup('env','BUILD_NUMBER') }}
         state: started
         pull: true
         recreate: yes
